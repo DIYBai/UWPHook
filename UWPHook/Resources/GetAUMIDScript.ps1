@@ -14,16 +14,26 @@ foreach ($app in $installedapps)
                     if($name -like '*DisplayName*' -or $name  -like '*ms-resource*')
                     {
                         $name = $appx.Package.Applications.Application.VisualElements.DisplayName;
-                    }
-                    if($name -like '*DisplayName*' -or $name  -like '*ms-resource*')
-                    {
-                        $name = "App name not found, double click here to edit it";
-                    }
+                        
+                    # comment out below chunk and uncomment further below bit for original code
+                        $logo = $app.InstallLocation + "\" + $appx.Package.Applications.Application.VisualElements.Square150x150Logo;
 
-                    $logo = $app.InstallLocation + "\" + $appx.Package.Applications.Application.VisualElements.Square150x150Logo;
+                        $aumidList += $name + "|" + $logo + "|" +
+                        $app.packagefamilyname + "!" + $id+ ";"
+                    }
+                    # comment out ending here
 
-                    $aumidList += $name + "|" + $logo + "|" +
-                    $app.packagefamilyname + "!" + $id+ ";"
+#                   Original code
+#                     }
+#                     if(-not ($name -like '*DisplayName*' -or $name  -like '*ms-resource*'))
+#                     {
+#                         $name = "App name not found, double click here to edit it";
+#                     }
+
+#                     $logo = $app.InstallLocation + "\" + $appx.Package.Applications.Application.VisualElements.Square150x150Logo;
+
+#                     $aumidList += $name + "|" + $logo + "|" +
+#                     $app.packagefamilyname + "!" + $id+ ";"
                 }
             }
         }
